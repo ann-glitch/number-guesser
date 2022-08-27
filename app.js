@@ -18,25 +18,44 @@ minNum.textContent = min;
 maxNum.textContent = max;
 
 //listen for guess
-guessBtn.addEventListener("click", function (e) {
+guessBtn.addEventListener("click", function () {
   let guess = parseInt(guessInput.value);
 
   //validate
   if (isNaN(guess) || guess < min || guess > max) {
     setMessage(`Please enter a number between ${min} and ${max}`, "red");
-  } else {
-    setMessage(`${guessInput.value} is wrong, You lose!`, "red");
   }
 
   //check if won
   if (guess === winningNum) {
-    guessInput.disabled = true;
-    guessInput.style.borderColor = "green";
-    setMessage(`${winningNum} is correct, YOU WIN`, "green");
-  }
+    gameOver(true, `${winningNum} is correct, YOU WIN`);
+  } else {
+    //deduct guesses
+    guessesLeft -= 1;
 
-  e.preventDefault();
+    if (guessesLeft === 0) {
+      gameOver(
+        false,
+        `Game over, you lost. The correct number is ${winningNum}`
+      );
+    } else {
+      guessInput.value = "";
+
+      guessInput.style.borderColor = "red";
+      setMessage(`Wrong answer, you have ${guessesLeft} guesses left`, "red");
+    }
+  }
 });
+
+function gameOver(won, msg) {
+  let color;
+  won === true ? (color = "green") : (color = "red");
+
+  guessInput.disabled = true;
+  message.style.color = color;
+  guessInput.style.borderColor = color;
+  setMessage(msg);
+}
 
 function setMessage(msg, color) {
   message.style.color = color;
