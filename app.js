@@ -2,7 +2,7 @@
 
 let min = 1,
   max = 10,
-  winningNum = getRandonNum(min, max),
+  winningNum = getRandomNum(min, max),
   guessesLeft = 3;
 
 //ui elements
@@ -35,7 +35,7 @@ guessBtn.addEventListener("click", function () {
 
   //check if won
   if (guess === winningNum) {
-    gameOver(true, `${winningNum} is correct, YOU WIN`);
+    gameOver(true, `${winningNum} is correct, YOU WIN!`);
   } else {
     //deduct guesses
     guessesLeft -= 1;
@@ -69,7 +69,7 @@ function gameOver(won, msg) {
 }
 
 //generate random number
-function getRandonNum(min, max) {
+function getRandomNum(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 

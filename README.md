@@ -3,4 +3,4 @@
 - a number guessing game.
 
 ---
-[Live Demo](https://ann-glitch.github.io/numberGuesser/)
+[Live Demo](https://ann-glitch.github.io/number-guesser/)
